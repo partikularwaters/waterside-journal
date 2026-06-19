@@ -1,0 +1,773 @@
+/* ==========================================================================
+   1. DESIGN TOKENS & VARIABLES
+   ========================================================================== */
+:root {
+  /* Editorial Color Palette */
+  --bg: #f5f1e8;
+  --text: #182d38;
+  --text-secondary: #1b415b;
+  --meta: #5d7687;
+  --rule: #d6d2c9;
+  --editorial-blue: #1b415b;
+
+  /* Traditional Rubrication Colors */
+  --scripture-ref: #910d1f;
+  --scripture-quote: #942093;
+  --author-quote: #1d3557;
+  --confession-quote: #385C48;
+
+  /* Typography Stacks */
+  --serif: 'EB Garamond', 'Ibarra Real Nova', Georgia, serif;
+  --sans: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  --display-serif: 'Playfair Display', 'Ibarra Real Nova', serif;
+
+  /* Layout Constraints */
+  --max-reading: 660px;
+}
+
+/* ==========================================================================
+   2. GLOBAL CSS RESET
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 22px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--serif);
+  line-height: 1.5;
+  padding: 0;
+}
+
+/* ==========================================================================
+   3. CORE ARCHITECTURAL LAYOUT
+   ========================================================================== */
+.page {
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Mobile-First Banner Viewport */
+.sidebar-container {
+  background-color: var(--editorial-blue);
+  width: 100%;
+  padding: 2rem 1.5rem 2.5rem 1.5rem;
+  box-sizing: border-box;
+}
+
+.archive {
+  max-width: var(--max-reading);
+  margin: 0 auto;
+  padding: 2.5rem 1.75rem;
+}
+
+/* Advanced Desktop Layout Profile */
+@media (min-width: 1024px) {
+  html {
+    font-size: 26px;
+  }
+
+  body {
+    background: linear-gradient(
+      to right,
+      var(--editorial-blue) 0%,
+      var(--editorial-blue) 520px,
+      var(--bg) 520px,
+      var(--bg) 100%
+    );
+  }
+
+  .page {
+    display: grid;
+    grid-template-columns: 520px 1fr;
+    min-height: 100vh;
+  }
+
+  .sidebar-container {
+    grid-column: 1;
+    width: 520px;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    padding: 7rem 3.5rem;
+  }
+
+  .archive {
+    grid-column: 2;
+    width: 100%;
+    max-width: 100%;
+    padding: 7rem 2rem;
+    margin: 0;
+  }
+}
+
+/* ==========================================================================
+   4. BRANDING & MASTHEAD COMPONENTS
+   ========================================================================== */
+.masthead {
+  text-align: center;
+  width: 100%;
+}
+
+.masthead a {
+  display: inline-block;
+  color: var(--bg);
+}
+
+.masthead img,
+.masthead svg {
+  max-width: 90%;
+  height: auto;
+}
+
+.masthead__subtitle {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: normal;
+  opacity: 1;
+  color: var(--bg);
+  text-align: center;
+  
+  /* --- MOBILE MICRO-CONTROL --- */
+  font-size: 0.95rem;
+  line-height: 1;
+  margin-top: -0.7rem;
+  margin-bottom: 0;
+  max-width: 100%;
+  white-space: nowrap; 
+}
+
+@media (min-width: 1024px) {
+  .masthead img,
+  .masthead svg {
+    max-width: 100%;
+  }
+
+  .masthead__subtitle {
+    text-align: center;
+    
+    /* --- DESKTOP MICRO-CONTROL --- */
+    font-size: 0.75rem;
+    line-height: 1.25;
+    margin-top: -1rem;
+    white-space: normal;
+    max-width: 200px;        
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* ==========================================================================
+   5. HOMEPAGE ARCHIVE & STREAM COMPONENTS
+   ========================================================================== */
+.divider {
+  border: none;
+  border-top: 1px solid var(--rule);
+  margin: clamp(2rem, 5vw, 3.5rem) 0;
+}
+
+.series {
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+}
+
+.series__eyebrow {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--meta);
+  margin-bottom: 0.3rem;
+}
+
+.series__title {
+  font-family: var(--serif);
+  font-size: 1.45rem;
+  font-weight: 400;
+  color: var(--text);
+  margin-bottom: 0.15rem;
+}
+
+.series__count {
+  font-family: var(--sans);
+  font-size: 12px;
+  color: var(--meta);
+  margin-bottom: 1.35rem;
+}
+
+.essay-list {
+  list-style: none;
+}
+
+.essay-list__item {
+  display: grid;
+  grid-template-columns: 2rem 1fr auto;
+  gap: 0 0.75rem;
+  align-items: baseline;
+  padding: 0.65rem 0;
+  border-top: 1px solid var(--rule);
+}
+
+.essay-list__item:last-child {
+  border-bottom: 1px solid var(--rule);
+}
+
+.essay-list__num {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--meta);
+  padding-top: 0.1em;
+}
+
+.essay-list__title {
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  line-height: 1.45;
+  color: var(--text);
+}
+
+.essay-list__title a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.12s ease;
+}
+
+.essay-list__title a:hover {
+  border-bottom-color: currentColor;
+}
+
+.essay-list__title--forthcoming {
+  font-style: italic;
+  color: var(--meta);
+}
+
+.essay-list__status {
+  font-family: var(--sans);
+  font-size: 9.5px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--meta);
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   6. LONG-FORM TYPOGRAPHY & LAYOUTS
+   ========================================================================== */
+.essay-back {
+  display: block; 
+  width: max-content;
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--meta);
+  text-decoration: none;
+  margin-bottom: 2.5rem;
+  transition: color 0.12s ease;
+  margin-left: 0;
+  margin-right: auto;
+}
+
+.essay-back:hover {
+  color: var(--scripture-ref);
+}
+
+@media (min-width: 1024px) {
+  .essay-back {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-right: 800px; 
+    white-space: nowrap;
+  }
+}
+
+.essay-header {
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.75rem;
+  border-bottom: 2px solid var(--rule);
+}
+
+.essay-header__series {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--meta);
+  margin-bottom: 0.6rem;
+}
+
+.essay-header__title {
+  font-family: var(--serif);
+  font-size: 2.2rem;
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--editorial-blue);
+  letter-spacing: -0.02em;
+  font-variant-ligatures: common-ligatures;
+  margin-bottom: 0.65rem;
+  text-wrap: balance;
+}
+
+.essay-body {
+  font-size: 1.15rem;
+  line-height: 1.55;
+  text-align: justify;
+  text-justify: inter-word;
+  color: var(--text);
+  font-variant-ligatures: common-ligatures !important;
+  text-rendering: optimizeLegibility !important;
+  -webkit-font-feature-settings: "ss01" 1;
+  font-feature-settings: "liga" 1, "calt" 1 !important;
+}
+
+.essay-body p {
+  margin-bottom: 1.35rem;
+}
+
+.essay-body p:last-child {
+  margin-bottom: 0;
+}
+
+.essay-body p:last-child,
+.essay-body blockquote:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* ==========================================================================
+   THE EXACT SEPARATOR SPACING CURE
+   ========================================================================== */
+.essay-body hr {
+  border: none !important;
+  border-top: 1px solid var(--rule) !important;
+  display: block !important;
+  height: 0 !important;
+  width: 100% !important;
+
+  /* Creates perfect, absolute editorial balance above and below the line */
+  margin-top: 4rem !important;    
+  margin-bottom: 4rem !important; 
+}
+
+.essay-body h2 {
+  font-family: var(--display-serif);
+  font-size: 1.5rem;
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: -0.04rem;
+  color: var(--meta);
+  margin-top: 1.20em;
+  margin-bottom: 0.1em;
+}
+
+.essay-body h3 {
+  font-family: var(--serif);
+  font-size: 1.45rem;
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--text);
+  margin-top: 0.85em;
+  margin-bottom: 0.1em;
+}
+
+.essay-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+  gap: 1rem;
+}
+
+.essay-nav a {
+  font-family: var(--sans);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--meta);
+  text-decoration: none;
+  transition: color 0.12s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 36%;
+}
+
+.essay-nav a:hover {
+  color: var(--text);
+}
+
+.essay-header__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 0.4rem;
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: var(--meta);
+  min-height: 1.2em;
+}
+
+.essay-meta__sep {
+  color: var(--rule);
+}
+
+.essay-meta__scripture {
+  font-family: var(--serif);
+  font-style: italic;
+}
+
+.display-line {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-align: center;
+  color: var(--text-secondary);
+  margin: 1.75em 0;
+}
+
+.forthcoming {
+  padding: clamp(3rem, 8vw, 5rem) 0;
+  text-align: center;
+}
+
+.forthcoming__text {
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--meta);
+  font-size: 1.05rem;
+}
+
+.site-footer {
+  margin-top: clamp(3rem, 8vw, 5rem);
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+  font-family: var(--sans);
+  font-size: 0.55rem;
+  letter-spacing: 0.03em;
+  color: var(--meta);
+  line-height: 1.9;
+}
+
+.site-footer a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* ==========================================================================
+   7. TRADITIONAL RUBCRICATION & FOOTNOTES
+   ========================================================================== */
+.essay-body blockquote {
+  margin: 1.5em 0;
+  padding: 0 0 0 1.5rem;
+  border-left: 2px solid var(--rule);
+}
+
+.essay-body blockquote p {
+  font-family: var(--display-serif);
+  color: var(--text-secondary);
+  margin-bottom: 0.4em;
+}
+
+.essay-body blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+.essay-body blockquote.scripture-quote {
+  border-left-color: var(--scripture-quote);
+}
+
+.essay-body blockquote.scripture-quote p {
+  color: var(--scripture-quote);
+  font-style: normal;
+}
+
+.essay-body blockquote.scripture-quote strong {
+  color: var(--scripture-ref);
+}
+
+.essay-body blockquote.author-quote {
+  border-left-color: var(--author-quote);
+}
+
+.essay-body blockquote.author-quote p {
+  color: var(--author-quote);
+  font-style: normal;
+}
+
+.essay-body cite {
+  display: block;
+  font-family: var(--serif) !important;
+  font-style: normal !important;
+  font-size: 0.85rem !important;
+  color: var(--meta) !important;
+  margin-top: 0.5em !important;
+}
+
+.scripture-ref {
+  color: var(--scripture-ref);
+}
+
+.scripture-inline {
+  color: var(--scripture-quote);
+}
+
+span#no-blockquote {
+  display: block !important;
+  margin: 1.8rem 0 !important;
+  padding-left: 3rem !important;
+  padding-right: 3rem !important;
+  font-family: 'EB Garamond', 'Ibarra Real Nova', Georgia, serif !important;
+  font-style: normal !important;
+  letter-spacing: normal !important;
+  font-size: 1.15rem !important;
+  color: var(--text) !important;
+  line-height: 1.65 !important;
+}
+
+sup {
+  font-family: var(--serif);
+  font-size: 0.62em;
+  line-height: 0;
+  vertical-align: super;
+}
+
+sup a,
+a.footnote-ref,
+.footnote-ref a {
+  color: var(--confession-quote) !important;
+  text-decoration: none;
+  transition: color 0.12s ease, opacity 0.12s ease;
+}
+
+sup a:visited,
+a.footnote-ref:visited,
+.footnote-ref a:visited,
+sup a:active,
+a.footnote-ref:active,
+.footnote-ref a:active {
+  color: var(--confession-quote) !important;
+}
+
+sup a:hover,
+sup a:focus,
+a.footnote-ref:hover,
+a.footnote-ref:focus,
+.footnote-ref a:hover,
+.footnote-ref a:focus {
+  color: var(--meta) !important;
+  opacity: 1 !important;
+  cursor: pointer;
+}
+
+.footnotes {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 2px solid var(--rule);
+  font-family: var(--serif);
+  font-size: 0.85rem;
+  color: var(--text);
+  line-height: 1.7;
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+.footnotes h2,
+.footnotes .footnotes-title {
+  display: none !important;
+}
+
+.footnotes ol {
+  padding-left: 1.25rem;
+  color: var(--meta);
+}
+
+.footnotes li {
+  margin-bottom: 0.6em;
+  color: var(--text);
+}
+
+/* ==========================================================================
+   EXTERNAL CITATION LINKS (e.g., Calvin's Works, URLs)
+   Keeps them matching your elegant deep-green footnote number styling
+   ========================================================================== */
+.footnotes li a,
+.footnotes li a:link,
+.footnotes li a:visited {
+  color: var(--confession-quote) !important;
+  font-family: var(--serif) !important;
+  text-decoration: underline !important;
+  text-underline-offset: 3px;
+  opacity: 1 !important;
+  display: inline !important;
+  transition: color 0.12s ease !important;
+  word-break: break-word !important;
+  overflow-wrap: break-word !important;
+}
+
+.footnotes li a:hover,
+.footnotes li a:focus {
+  color: var(--meta) !important;
+  text-decoration: underline !important;
+}
+
+/* ==========================================================================
+   RETURN ARROWS ONLY (↩)
+   ========================================================================== */
+.footnotes li a.footnote-backref,
+.footnotes li a.footnote-backref:link,
+.footnotes li a.footnote-backref:visited,
+.footnotes li a.footnote-backref:active,
+.footnotes li a[data-footnote-backref],
+.footnotes li a[data-footnote-backref]:visited,
+.footnotes li a[aria-label*="back"],
+.footnotes li a[aria-label*="back"]:visited {
+  color: var(--confession-quote) !important;
+  font-family: var(--sans) !important;
+  
+  /* DELICATE PRINT-SIZE ADJUSTMENT */
+  font-size: 0.75em !important;         
+  line-height: 1 !important;
+  
+  text-decoration: none !important;
+  margin-left: 0.15rem !important;
+  display: inline-block !important;
+  opacity: 1 !important;               
+  vertical-align: middle !important;
+  transition: color 0.12s ease, opacity 0.12s ease, transform 0.12s ease !important;
+}
+
+.footnotes li a.footnote-backref:hover,
+.footnotes li a[data-footnote-backref]:hover,
+.footnotes li a[aria-label*="back"]:hover {
+  color: var(--meta) !important;
+  opacity: 1 !important;                 
+  transform: translateY(-1px) !important; 
+}
+
+/* Mobile Layout Overrides */
+@media (max-width: 480px) {
+  html { font-size: 16px; }
+  .series__title { font-size: 1.1rem; }
+  .essay-header__title { font-size: 1.65rem; }
+  .essay-list__item { grid-template-columns: 1.5rem 1fr; }
+  .essay-list__status { display: none; }
+  .essay-nav a { max-width: 42%; }
+}
+
+/* Custom Desktop Reading Constraints */
+@media (min-width: 1024px) {
+  .series,
+  .home-divider,
+  .essay-header,
+  .essay-body,
+  .essay-nav,
+  .site-footer,
+  .footnotes {
+    max-width: 800px; 
+    margin-left: auto;  
+    margin-right: auto;
+  }
+}
+
+/* ==========================================================================
+   TARGETED CITATIONS HEADER PROPERTIES
+   ========================================================================== */
+
+/* ISOLATED CITATIONS PROPERTIES: */
+.essay-body h3:has(+ cite), 
+.essay-body h3:has(+ blockquote),
+.essay-body h3:last-of-type {
+  font-family: var(--sans) !important;
+  font-size: 0.85rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.15em !important;
+  text-transform: uppercase !important;
+  color: var(--meta) !important;
+  margin-top: 3.5rem !important;
+  margin-bottom: 0rem !important;
+  border: none !important;
+  font-style: normal !important;
+}
+
+/* ==========================================================================
+   OVERRIDE FOR INTERNAL ESSAY SEPARATORS
+   ========================================================================== */
+.essay-body hr,
+.essay-body .divider,
+.essay-body .display-line,
+hr {
+  border: none !important;
+  border-top: 2px solid var(--rule) !important;
+  margin-top: 1rem !important;
+  margin-bottom: 2.5rem;
+  display: block !important;
+  height: 0 !important;
+}
+
+/* ==========================================================================
+   EDITORIAL BLOCKQUOTE (Targeting the specific class)
+   ========================================================================== */
+.editorial-blockquote {
+  margin: 1.75rem 0rem 1.75rem 2.5rem;
+  padding: 0;
+  border-left: none !important;
+  
+  /* Typography */
+  font-family: var(--display-serif);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--meta);
+  font-style: normal;
+  background: none !important;
+}
+
+.editorial-blockquote p {
+  margin: 0 !important;
+  padding: 0 !important;
+  font-family: inherit;
+  color: inherit;
+  font-style: inherit;
+}
+
+.home-divider {
+  border: none;
+  border-top: 1px solid var(--rule);
+  width: 100%;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: clamp(2rem, 5vw, 3.5rem);
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+  box-sizing: border-box;
+}
+
+.copyright-notice {
+  margin-top: -0.2rem !important;
+  margin-bottom: 1rem;
+  font-size: 11px;
+  color: var(--meta);
+}

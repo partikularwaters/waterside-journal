@@ -1,0 +1,43 @@
+import "./globals.css";
+
+export const metadata = {
+  title: "Waterside",
+  description: "A Filipino confessional Baptist journal of theological essays, historical retrieval, and pastoral reflection written for ordinary Filipino Christians who hunger for deeper roots beside the abundant waters of Christ.",
+};
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link 
+          href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Ibarra+Real+Nova:ital,wght@0,400..700;1,400..700&family=Inter:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" 
+          rel="stylesheet" 
+        />
+      </head>
+      <body>
+        <div className="page">
+          
+          {/* Authentic Sidebar Wrapper */}
+          <aside className="sidebar-container">
+            <header className="masthead">
+              <a href="/" style={{ textDecoration: 'none', color: 'inherit', display: 'block', marginBottom: '1rem' }}>
+                <img src="/waterside-logo.svg" alt="Waterside Logo" className="masthead__logo" />
+              </a>
+              <p className="masthead__subtitle">
+                Essays Beside Our Common Abundant Waters
+              </p>
+            </header>
+          </aside>
+
+          {/* Core Content Layout Stream */}
+          <main className="archive">
+            {children}
+          </main>
+
+        </div>
+      </body>
+    </html>
+  );
+}
