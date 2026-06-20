@@ -1,7 +1,7 @@
 export const metadata = {
   title: "The Priesthood of All Believers: A Misread Doctrine?",
   series: "The Priesthood of All Believers",
-  date: "June 20, 2026"
+  date: "June 20, 2026",
   author: "Madrid J."
 }
 
@@ -10,7 +10,10 @@ export const metadata = {
 <header className="essay-header">
   <div className="essay-header__series">{metadata.series}</div>
   <h1 className="essay-header__title">{metadata.title}</h1>
-  <div className="essay-header__meta">Published {metadata.date}</div>
+  <div className="essay-header__meta">Published {metadata.date}
+    <span className="essay-meta__sep"> &bull; </span> 
+    {metadata.author}
+  </div>
 </header>
 
 <div className="essay-body">
