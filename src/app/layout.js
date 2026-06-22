@@ -1,3 +1,4 @@
+// src/app/layout.js
 import "./globals.css";
 
 export const metadata = {
@@ -19,7 +20,7 @@ export default function RootLayout({ children }) {
       <body>
         <div className="page">
           
-          {/* Authentic Sidebar Wrapper */}
+          {/* AUTHENTIC SIDEBAR WRAPPER (Purely branding now — no links) */}
           <aside className="sidebar-container">
             <header className="masthead">
               <a href="/" style={{ textDecoration: 'none', color: 'inherit', display: 'block', marginBottom: '1rem' }}>
@@ -31,8 +32,18 @@ export default function RootLayout({ children }) {
             </header>
           </aside>
 
-          {/* Core Content Layout Stream */}
+          {/* CORE CONTENT LAYOUT STREAM (The link lives strictly here) */}
           <main className="archive">
+            <nav className="site-nav">
+                <a href="/" className="site-nav__logo" aria-label="Waterside Home">
+                  <span className="logo-mask"></span>
+                </a>
+                <div className="site-nav__links">
+                  <a href="/">Archive</a>
+                  <a href="/about">About</a>
+                </div>
+            </nav>
+            
             {children}
           </main>
 

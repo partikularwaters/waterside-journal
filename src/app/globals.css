@@ -98,14 +98,14 @@ body {
     height: 100vh;
     position: sticky;
     top: 0;
-    padding: 7rem 3.5rem;
+    padding: 2rem 3.5rem 2rem 3.5rem;
   }
 
   .archive {
     grid-column: 2;
     width: 100%;
     max-width: 100%;
-    padding: 7rem 2rem;
+    padding: 2rem;
     margin: 0;
   }
 }
@@ -247,6 +247,7 @@ body {
 }
 
 .essay-list__title a:hover {
+  color: var(--scripture-ref);
   border-bottom-color: currentColor;
 }
 
@@ -263,6 +264,95 @@ body {
   text-transform: uppercase;
   color: var(--meta);
   white-space: nowrap;
+}
+
+/* ==========================================================================
+   GLOBAL UTILITY NAVIGATION
+   ========================================================================== */
+.site-nav {
+  display: flex;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--bg);
+  margin-top: -2.5rem; 
+  margin-left: -1.75rem;
+  margin-right: -1.75rem;
+  padding: 1.5rem 1.75rem; 
+  margin-bottom: 1rem;
+}
+
+.site-nav__logo {
+  display: flex;
+  height: 22px; /* Keeps the logo perfectly proportioned to your 12px uppercase links */
+  align-items: center;
+  animation: fadeLogoIn linear both;
+  animation-timeline: scroll(root);
+  animation-range: 0px 160px;
+}
+
+.site-nav__logo .logo-mask {
+  display: block;
+  height: 100%;
+  aspect-ratio: 5 / 1;
+  background-color: var(--meta);
+  -webkit-mask: url('/waterside-logo.svg') no-repeat center / contain;
+  mask: url('/waterside-logo.svg') no-repeat center / contain;
+  transition: background-color 0.12s ease;
+}
+
+.site-nav__logo:hover .logo-mask {
+  background-color: var(--scripture-ref);
+}
+
+@keyframes fadeLogoIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.site-nav__links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.site-nav__links a {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--meta);
+  text-decoration: none;
+  transition: color 0.12s ease, opacity 0.12s ease;
+}
+
+.site-nav__links a:hover {
+  color: var(--scripture-ref);
+}
+
+@media (min-width: 1024px) {
+  .site-nav {
+    margin-top: -2rem;
+    margin-left: -2rem;
+    margin-right: -2rem;
+    padding: 2rem 2rem 1.5rem 2rem;
+    margin-bottom: 1rem;
+    justify-content: flex-end; 
+  }
+
+  .site-nav__logo {
+    display: none !important;
+  }
+
+  .site-nav__links {
+    max-width: 800px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: flex-end;
+  }
 }
 
 /* ==========================================================================
@@ -299,6 +389,8 @@ body {
 }
 
 .essay-header {
+  margin-top: 0;
+  padding-top: 0rem;
   margin-bottom: 2.5rem;
   padding-bottom: 1.75rem;
   border-bottom: 2px solid var(--rule);
@@ -327,7 +419,7 @@ body {
 }
 
 .essay-body {
-  font-size: 1.15rem;
+  font-size: 1.25rem;
   line-height: 1.55;
   text-align: justify;
   text-justify: inter-word;
