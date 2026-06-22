@@ -65,19 +65,7 @@ export default function Home() {
           Expected Late 2026
         </div>
       </div>
-        
-      {/* Site Footer */}
-      <footer className="site-footer" style={{ marginTop: '5rem', paddingTop: '2rem' }}>
-        <p style={{ fontFamily: 'var(--sans)', color: 'var(--text-secondary)', marginBottom: '1.5rem', maxWidth: '60%', textAlign: 'left', lineHeight: '1.6' }}>
-          <strong>Waterside.</strong> A Filipino confessional Baptist journal of theological essays, historical retrieval, and pastoral reflection —
-          written for ordinary Filipino Christians who hunger for deeper roots beside the abundant waters of Christ.
-        </p>
-          
-        <p className="copyright-notice">
-          All original content is freely given and <a href="https://copy.church/free/" target="_blank" rel="noopener noreferrer">dedicated to the public domain.
-          </a>
-        </p>
-      </footer>
+              
     </>
   );
 }
