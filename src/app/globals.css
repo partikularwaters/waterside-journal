@@ -452,15 +452,13 @@ body {
   display: block !important;
   height: 0 !important;
   width: 100% !important;
-
-  /* Creates perfect, absolute editorial balance above and below the line */
   margin-top: 4rem !important;    
   margin-bottom: 4rem !important; 
 }
 
 .essay-body h2 {
   font-family: var(--display-serif);
-  font-size: 1.5rem;
+  font-size: 1.35rem;
   font-weight: 400;
   font-style: italic;
   letter-spacing: -0.04rem;
@@ -471,7 +469,7 @@ body {
 
 .essay-body h3 {
   font-family: var(--serif);
-  font-size: 1.45rem;
+  font-size: 1.35rem;
   font-weight: 500;
   line-height: 1.35;
   color: var(--text);
@@ -556,15 +554,17 @@ body {
   margin-top: clamp(3rem, 8vw, 5rem);
   padding-top: 1.5rem;
   border-top: 1px solid var(--rule);
+  text-align: justify;
   font-family: var(--sans);
   font-size: 0.55rem;
   letter-spacing: 0.03em;
   color: var(--meta);
   line-height: 1.9;
+  text-justify: inter-word;
 }
 
 .site-footer a {
-  color: inherit;
+  color: var(--scripture-ref);
   text-decoration: underline;
   text-underline-offset: 2px;
 }
