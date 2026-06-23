@@ -47,12 +47,12 @@ export default function RootLayout({ children }) {
             {children}
 
             <footer className="site-footer" style={{ marginTop: '5rem', paddingTop: '2rem' }}>
-              <p style={{ fontFamily: 'var(--sans)', color: 'var(--text-secondary)', marginBottom: '1.5rem', maxWidth: '80%', lineHeight: '1.6' }}>
+              <p style={{marginBottom: '1.5rem'}}>
                 <strong>Waterside.</strong> A Filipino confessional Baptist journal of theological essays, historical retrieval, and pastoral reflection —
                 written for ordinary Filipino Christians who hunger for deeper roots beside the abundant waters of Christ.
               </p>
                 
-              <p className="copyright-notice" style={{ maxWidth: '80%' }}>
+              <p className="copyright-notice">
                 All original content is freely given and <a href="https://copy.church/free/" target="_blank" rel="noopener noreferrer">dedicated to the public domain.</a>
               </p>
             </footer>

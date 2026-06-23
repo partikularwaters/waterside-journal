@@ -5,26 +5,70 @@ export function useMDXComponents(components) {
     ...components,
     // Intercepts standard Markdown blockquotes (">") automatically
     blockquote: ({ children }) => {
-      const firstChild = React.Children.toArray(children)[0];
-      const rawText = firstChild?.props?.children;
+      let variantClass = '';
+      let found = false;
 
-      // If you typed an exclamation mark at the start of your quote block:
-      if (typeof rawText === 'string' && rawText.trim().startsWith('!')) {
-        const cleanChildren = React.Children.map(children, (child, idx) => {
-          if (idx === 0 && child.props?.children) {
-            return React.cloneElement(child, {
-              ...child.props,
-              children: child.props.children.trim().substring(1).trim()
-            });
+      // Recursive function to locate the macro token in the first available text string
+      function scanAndStrip(node) {
+        if (!node) return node;
+
+        // Condition A: If it's a raw text string, look for our tokens
+        if (typeof node === 'string') {
+          const trimmed = node.trim();
+          if (!found) {
+            if (trimmed.startsWith('!')) { variantClass = 'scripture-quote'; found = true; }
+            else if (trimmed.startsWith('~')) { variantClass = 'author-quote'; found = true; }
+            else if (trimmed.startsWith('=')) { variantClass = 'confession-quote'; found = true; }
+
+            if (found) {
+              const macroChar = trimmed[0];
+              const macroIndex = node.indexOf(macroChar);
+              const postMacro = node.substring(macroIndex + 1);
+              // Safely strips the macro symbol and the single trailing space right after it
+              return node.substring(0, macroIndex) + (postMacro.startsWith(' ') ? postMacro.substring(1) : postMacro);
+            }
           }
-          return child;
-        });
+          return node;
+        }
 
-        return <div className="scripture-blockquote">{cleanChildren}</div>;
+        // Condition B: If it's a React element, recursively map its internal children
+        if (React.isValidElement(node) && node.props && 'children' in node.props) {
+          const originalChildren = node.props.children;
+          const processedChildren = mapChildren(originalChildren);
+          
+          return React.cloneElement(node, {
+            ...node.props,
+            children: processedChildren
+          });
+        }
+
+        return node;
       }
 
-      // Default: Classical Book Blockquote (Footnote-safe)
-      return <div className="editorial-blockquote">{children}</div>;
+      function mapChildren(nodes) {
+        if (Array.isArray(nodes)) {
+          return nodes.map((child, index) => {
+            const processed = scanAndStrip(child);
+            // FIX: If the processed node is a React element, explicitly assign a unique key
+            if (React.isValidElement(processed)) {
+              return React.cloneElement(processed, {
+                key: child.key ?? index
+              });
+            }
+            return processed;
+          });
+        }
+        return scanAndStrip(nodes);
+      }
+
+      const updatedChildren = mapChildren(children);
+
+      // Returns the custom structural block matching your targeted CSS stylesheet
+      return (
+        <div className={`editorial-blockquote ${variantClass}`.trim()}>
+          {updatedChildren}
+        </div>
+      );
     },
   };
 }

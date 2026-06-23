@@ -13,7 +13,6 @@
   /* Traditional Rubrication Colors */
   --scripture-ref: #910d1f;
   --scripture-quote: #942093;
-  --author-quote: #1d3557;
   --confession-quote: #385C48;
 
   /* Typography Stacks */
@@ -359,7 +358,7 @@ body {
    6. LONG-FORM TYPOGRAPHY & LAYOUTS
    ========================================================================== */
 .essay-back {
-  display: block; 
+  display: block;
   width: max-content;
   font-family: var(--sans);
   font-size: 12px;
@@ -408,7 +407,7 @@ body {
 
 .essay-header__title {
   font-family: var(--serif);
-  font-size: 2.2rem;
+  font-size: 2.5rem;
   font-weight: 400;
   line-height: 1.15;
   color: var(--editorial-blue);
@@ -556,10 +555,11 @@ body {
   border-top: 1px solid var(--rule);
   text-align: justify;
   font-family: var(--sans);
-  font-size: 0.55rem;
+  font-size: 0.6rem;
+  line-height: 1.6;
   letter-spacing: 0.03em;
+  max-width: 70%;
   color: var(--meta);
-  line-height: 1.9;
   text-justify: inter-word;
 }
 
@@ -569,48 +569,68 @@ body {
   text-underline-offset: 2px;
 }
 
+.copyright-notice {
+  margin-top: -0.2rem !important;
+  margin-bottom: 1rem;
+  font-size: .4rem;
+  color: var(--meta);
+}
+
 /* ==========================================================================
    7. TRADITIONAL RUBCRICATION & FOOTNOTES
    ========================================================================== */
-.essay-body blockquote {
-  margin: 1.5em 0;
-  padding: 0 0 0 1.5rem;
-  border-left: 2px solid var(--rule);
+span.confession-quote {
+  color: var(--confession-quote);
+  font-family: var(--serif);
+  font-weight: 500;
 }
 
-.essay-body blockquote p {
-  font-family: var(--display-serif);
-  color: var(--text-secondary);
-  margin-bottom: 0.4em;
+.editorial-blockquote {
+  margin: -0.25rem 0 1rem 1.25rem;
+  padding: 0.25rem 0 0.25rem 1.25rem;
+  border-radius: 10px 0 0 10px;
+  box-sizing: border-box;
+  background: transparent;
+  border-left: 3px solid var(--editorial-blue);
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: var(--text);
 }
 
-.essay-body blockquote p:last-child {
-  margin-bottom: 0;
-}
-
-.essay-body blockquote.scripture-quote {
-  border-left-color: var(--scripture-quote);
-}
-
-.essay-body blockquote.scripture-quote p {
-  color: var(--scripture-quote);
+.editorial-blockquote p {
+  font-family: inherit !important;
+  font-size: inherit !important;
+  line-height: inherit !important;
+  color: inherit !important;
+  margin-bottom: 1rem;
   font-style: normal;
 }
 
-.essay-body blockquote.scripture-quote strong {
+.editorial-blockquote p:last-child {
+  margin-bottom: 0 !important;
+}
+
+.editorial-blockquote.author-quote {
+  color: var(--editorial-blue);
+  border-left: 7px solid var(--editorial-blue);
+}
+
+.editorial-blockquote.scripture-quote {
+  color: var(--scripture-quote);
+  border-left: 7px solid var(--scripture-quote);
+}
+
+.editorial-blockquote.scripture-quote strong {
   color: var(--scripture-ref);
 }
 
-.essay-body blockquote.author-quote {
-  border-left-color: var(--author-quote);
+.editorial-blockquote.confession-quote {
+  color: var(--confession-quote);
+  border-left: 7px solid var(--confession-quote);
 }
 
-.essay-body blockquote.author-quote p {
-  color: var(--author-quote);
-  font-style: normal;
-}
-
-.essay-body cite {
+.editorial-blockquote cite {
   display: block;
   font-family: var(--serif) !important;
   font-style: normal !important;
@@ -632,7 +652,7 @@ span#no-blockquote {
   margin: 1.8rem 0 !important;
   padding-left: 3rem !important;
   padding-right: 3rem !important;
-  font-family: 'EB Garamond', 'Ibarra Real Nova', Georgia, serif !important;
+  font-family: var(--serif);
   font-style: normal !important;
   letter-spacing: normal !important;
   font-size: 1.15rem !important;
@@ -703,8 +723,7 @@ a.footnote-ref:focus,
 }
 
 /* ==========================================================================
-   EXTERNAL CITATION LINKS (e.g., Calvin's Works, URLs)
-   Keeps them matching your elegant deep-green footnote number styling
+   EXTERNAL CITATION LINKS
    ========================================================================== */
 .footnotes li a,
 .footnotes li a:link,
@@ -762,9 +781,9 @@ a.footnote-ref:focus,
 
 /* Mobile Layout Overrides */
 @media (max-width: 480px) {
-  html { font-size: 16px; }
-  .series__title { font-size: 1.1rem; }
-  .essay-header__title { font-size: 1.65rem; }
+  html { font-size: 16.5px; }
+  .series__title { font-size: 1.35rem; }
+  .essay-header__title { font-size: 2.15rem; }
   .essay-list__item { grid-template-columns: 1.5rem 1fr; }
   .essay-list__status { display: none; }
   .essay-nav a { max-width: 42%; }
@@ -820,31 +839,6 @@ hr {
   height: 0 !important;
 }
 
-/* ==========================================================================
-   EDITORIAL BLOCKQUOTE (Targeting the specific class)
-   ========================================================================== */
-.editorial-blockquote {
-  margin: 1.75rem 0rem 1.75rem 2.5rem;
-  padding: 0;
-  border-left: none !important;
-  
-  /* Typography */
-  font-family: var(--display-serif);
-  font-size: 1.1rem;
-  line-height: 1.6;
-  color: var(--meta);
-  font-style: normal;
-  background: none !important;
-}
-
-.editorial-blockquote p {
-  margin: 0 !important;
-  padding: 0 !important;
-  font-family: inherit;
-  color: inherit;
-  font-style: inherit;
-}
-
 .home-divider {
   border: none;
   border-top: 1px solid var(--rule);
@@ -855,11 +849,4 @@ hr {
   margin-top: clamp(2rem, 5vw, 3.5rem);
   margin-bottom: clamp(2rem, 5vw, 3.5rem);
   box-sizing: border-box;
-}
-
-.copyright-notice {
-  margin-top: -0.2rem !important;
-  margin-bottom: 1rem;
-  font-size: 11px;
-  color: var(--meta);
 }
