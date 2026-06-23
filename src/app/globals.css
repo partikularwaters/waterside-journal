@@ -558,7 +558,7 @@ body {
   font-size: 0.6rem;
   line-height: 1.6;
   letter-spacing: 0.03em;
-  max-width: 70%;
+  max-width: 75%;
   color: var(--meta);
   text-justify: inter-word;
 }
