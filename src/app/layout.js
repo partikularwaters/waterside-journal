@@ -1,5 +1,6 @@
 // src/app/layout.js
 import "./globals.css";
+import { Analytics } from '@vercel/analytics/next';
 
 export const metadata = {
   title: "Waterside",
@@ -59,6 +60,7 @@ export default function RootLayout({ children }) {
           </main>
 
         </div>
+        <Analytics />
       </body>
     </html>
   );
